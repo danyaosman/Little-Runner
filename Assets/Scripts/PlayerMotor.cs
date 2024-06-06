@@ -63,14 +63,18 @@ public class PlayerMotor : MonoBehaviour
             // Jumping
             if (Input.GetKeyDown(KeyCode.W))
             {
-                soundEffectsplayer.PlaySFX(soundEffectsplayer.jump);
+                soundEffectsplayer.PlaySFX(soundEffectsplayer.jump); //sfx
                 verticalVelocity = jumpForce;
                 animator.SetTrigger("Jump");
 
                 speed = jumpSpeed;
+
             }
         }
-        else verticalVelocity -= gravity * Time.deltaTime;
+        else
+        {
+            verticalVelocity -= gravity * Time.deltaTime;
+        }
 
         // X = left and right
         moveVector.x = Input.GetAxisRaw("Horizontal") * speed;
@@ -93,6 +97,7 @@ public class PlayerMotor : MonoBehaviour
     private IEnumerator Slide()
     {
         isSliding = true;
+
         animator.SetBool("isSliding", true);
 
         //reduce player height when sliding
@@ -111,6 +116,7 @@ public class PlayerMotor : MonoBehaviour
 
         // reset the slide animation
         animator.SetBool("isSliding", false);
+
         isSliding = false;
     }
 
@@ -125,7 +131,7 @@ public class PlayerMotor : MonoBehaviour
         {
             soundEffectsplayer.PlaySFX(soundEffectsplayer.death);
             EndOfGame.TriggerGameOver();
-            animator.SetTrigger("Die");
+            animator.SetTrigger("Die"); // Maybe we can add death animation
         }
     }
 
